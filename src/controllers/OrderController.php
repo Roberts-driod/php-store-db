@@ -12,20 +12,7 @@ class OrderController{
 
         $orders = DB::query("SELECT * FROM Orders");
 
-        foreach($orders as $order){
-            echo("<br>");
-            echo("<strong>");
-            echo("Order:");
-
-
-        foreach($order as $key => $value){
-                echo("<br>");
-                echo("$key : $value ");
-        }
-
-            echo("</strong>");
-            echo("<br>");
-        }
+        require __DIR__ . '/../views/orders.php';
 
     }
 

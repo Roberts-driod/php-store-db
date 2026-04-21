@@ -12,22 +12,11 @@ class CustomerController{
 
         $customers = DB::query("SELECT * FROM customers");
 
-        foreach($customers as $customer){
-            echo("<br>");
-            echo("<strong>");
-            echo("Customer:");
-            
-        foreach($customer as $key => $value){
-                echo("<br>");
-                echo("$key : $value ");
-        }
-            echo("</strong>");
-            echo("<br>");
-        }
+
+        require __DIR__ . '/../views/customers.php';
+
 
     }
-
-
 
 }
 
