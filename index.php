@@ -4,6 +4,7 @@
     <a href="/">Home</a>
     <a href="/customers">Clients</a>
     <a href="/orders">Orders</a>
+    <a href="/customers?with-orders=full">Clients with orders</a>
 </nav>
 
 <link rel="stylesheet" href="/css/style.css">
