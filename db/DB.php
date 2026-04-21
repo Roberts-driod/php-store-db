@@ -2,8 +2,6 @@
 
 <?php 
 
-// Šai klasei ir statisks atribūts $pdo un statiska metode 'connect', kura veic datubāzes konekciju un saglabā to statiskajā mainīgajā $pdo. 
-// Izveidojiet arī statisku metodi 'query' ar $sqlQuery kā parametru.
 
 class DB {
 
