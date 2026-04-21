@@ -9,10 +9,11 @@ public static $pdo;
 
 
 public static function connect(){
-$servername = "172.29.144.1";
-$username = "store_app";
-$password = "password";
-$dbname = "store_dev";
+
+$servername = $_ENV['DB_HOST'];
+$username = $_ENV['DB_USER'];
+$password = $_ENV['DB_PASS'];
+$dbname = $_ENV['DB_NAME'];
 
 try {
 

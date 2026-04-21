@@ -3,3 +3,5 @@
 db/user.sql
 
 .env
+
+/vendor

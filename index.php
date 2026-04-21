@@ -4,7 +4,6 @@
     <a href="/">Home</a>
     <a href="/customers">Clients</a>
     <a href="/orders">Orders</a>
-    <a href="/clients-orders">Clients with orders</a>
 </nav>
 
 <link rel="stylesheet" href="/css/style.css">
@@ -16,6 +15,11 @@ $title = "Store";
 echo("<h1>");
 echo($title);
 echo("</h1>");
+
+
+require __DIR__ . '/vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+$dotenv->load();
 
 
         $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -31,6 +35,7 @@ echo("</h1>");
 
             OrderController::index();
         }
+
 
 
 ?>
