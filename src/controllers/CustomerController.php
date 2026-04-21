@@ -1,11 +1,13 @@
 
 <?php
 
+require_once __DIR__ . '/../models/Customer.php';
+
 class CustomerController{
 
     public static function index() {
 
-        require_once __DIR__ . '/../../db/DB.php';
+
 
         $withOrders = $_GET['with-orders'] ?? null;
 
@@ -22,8 +24,8 @@ class CustomerController{
     }
 
     public static function Customers(){
-
-    $customers = DB::query("SELECT * FROM customers");
+    
+    $customers = Customer::getALL();
     require __DIR__ . '/../views/customers.php';
 
     }
@@ -31,12 +33,7 @@ class CustomerController{
     public static function CustomersWithOrders(){
 
 
-    $data = DB::query
-    ("SELECT * FROM CUSTOMERS C 
-        LEFT JOIN Orders o ON 
-        o.Customers_Id = c.Id
-    ");
-
+    $data = Customer::getAllWithOrders();
     require __DIR__ . '/../views/customersWithOrders.php';
 
 
