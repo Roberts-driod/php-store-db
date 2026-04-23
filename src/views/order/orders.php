@@ -1,43 +1,14 @@
-
-<?php
-
-if(isset($orders)){
-
-        foreach($orders as $order){
-            echo("<br>");
-            echo("<strong>");
-            echo("Order:");
-
-
-        foreach($order as $key => $value){
-                echo("<br>");
-                echo("$key : $value ");
-        }
-
-            echo("</strong>");
-            echo("<br>");
-        }
-}
-
-if(isset($ordersWithStatus)){
-    $orders = $ordersWithStatus;
-            foreach($orders as $order){
-            echo("<br>");
-            echo("<strong>");
-            echo("Order:");
-
-
-        foreach($order as $key => $value){
-                echo("<br>");
-                echo("$key : $value ");
-        }
-
-            echo("</strong>");
-            echo("<br>");
-        }
-}
-
-
-?>
+<?php if (isset($orders) && !empty($orders)): ?>
+    <?php foreach ($orders as $order): ?>
+        <div style="border: 1px solid #ccc; margin: 10px; padding: 10px;">
+            <strong>Order ID:</strong> <?= $order->order_id ?><br>
+            <strong>Status:</strong> <?= $order->status ?><br>
+            <strong>Date:</strong> <?= $order->order_date ?><br>
+            <strong>Comments:</strong> <?= $order->comments ?? 'None' ?>
+        </div>
+    <?php endforeach; ?>
+<?php else: ?>
+    <p>No orders found.</p>
+<?php endif; ?>
 
 <a href="/orders/create">Create new order</a>

@@ -1,23 +1,22 @@
 <?php
+namespace App\Controllers;
 
-require_once __DIR__ . '/../models/Order.php';
-require_once __DIR__ . '/../models/Customer.php';
+use App\Models\Customer;
+use App\Models\Order;
+use App\Database\DB;
 
 class OrderController{
 
 
     public static function index(){
 
+        $status = $_GET['status'] ?? null;
 
+        $orders = $status 
+                ? Order::getOrdersWithStatus($status) 
+                : Order::getAll();
 
-        $withOrders = $_GET['status'] ?? null;
-
-
-        if ($withOrders) {
-            self::OrdersWithStatus($withOrders);
-        } else {
-            self::Orders();
-        }
+        require __DIR__ . '/../views/order/orders.php';
 
     }
 
@@ -34,8 +33,7 @@ class OrderController{
 
         Order::create($customerId, $status, $comment);
 
-        header("Location: /orders");
-        exit;
+        redirect('/orders');
     }
 
         public static function Orders(){

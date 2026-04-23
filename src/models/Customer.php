@@ -1,9 +1,8 @@
-
-
 <?php
+namespace App\Models;
 
-require_once __DIR__ . '/../../db/DB.php';
-require_once __DIR__ . '/Order.php';
+use App\Database\DB;
+use App\Models\Order;
 
 class Customer {
 

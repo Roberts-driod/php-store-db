@@ -1,60 +1,32 @@
-
-
-<nav>
-    <a href="/">Home</a>
-    <a href="/customers">Clients</a>
-    <a href="/orders">Orders</a>
-    <a href="/customers?with-orders=full">Clients with orders</a>
-</nav>
-
-<link rel="stylesheet" href="/css/style.css">
-
 <?php
-
-$title = "Store";
-
-echo("<h1>");
-echo($title);
-echo("</h1>");
-
-
 require __DIR__ . '/vendor/autoload.php';
+
+use App\Core\Router;
+use App\Controllers\CustomerController;
+use App\Controllers\OrderController;
+
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
 $dotenv->load();
 
 
-        $requestUri = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-
-        if ($requestUri == "/customers"){
-            require __DIR__ . "/src/controllers/CustomerController.php";
-
-            CustomerController::index();
-        }
-
-        if ($requestUri == "/orders"){
-            require __DIR__ . "/src/controllers/OrderController.php";
-
-            OrderController::index();
-        }
-
-        if($requestUri == "/"){
-            require __DIR__ . "/src/controllers/CustomerController.php";
-            require __DIR__ . "/src/controllers/OrderController.php";
-            CustomerController::index();
-            OrderController::index();
-        }
-
-        if ($requestUri == "/orders/create") {
-            require __DIR__ . "/src/controllers/OrderController.php";
-            OrderController::create();
-        }
-
-        if ($requestUri == "/orders/store") {
-            require __DIR__ . "/src/controllers/OrderController.php";
-            OrderController::store();
-        }
+$router = new Router();
 
 
+$router->add('/', function() {
+    CustomerController::index();
+    OrderController::index();
+});
+
+$router->add('/customers', [CustomerController::class, 'index']);
+$router->add('/orders', [OrderController::class, 'index']);
+$router->add('/orders/create', [OrderController::class, 'create']);
+$router->add('/orders/store', [OrderController::class, 'store']);
 
 
-?>
+require __DIR__ . '/src/views/layout/header.php';
+
+
+$router->dispatch($_SERVER['REQUEST_URI']);
+
+
+require __DIR__ . '/src/views/layout/footer.php';

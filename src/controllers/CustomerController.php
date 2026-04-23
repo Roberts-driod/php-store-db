@@ -1,7 +1,9 @@
-
 <?php
+namespace App\Controllers;
 
-require_once __DIR__ . '/../models/Customer.php';
+use App\Models\Customer;
+use App\Models\Order;
+use App\Database\DB;
 
 class CustomerController{
 

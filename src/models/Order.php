@@ -1,10 +1,8 @@
-
-
 <?php
+namespace App\Models;
 
-
-require_once __DIR__ . '/../../db/DB.php';
-require_once __DIR__ . '/Customer.php';
+use App\Database\DB;
+use App\Models\Customer;
 
 class Order {
 
@@ -34,6 +32,21 @@ class Order {
         return $orders;
     }
 
+
+        public static function getOrdersWithStatus($status) {
+            $rows = DB::query(
+                "SELECT * FROM Orders WHERE status = :status",
+                ['status' => $status]
+            );
+
+            $orders = [];
+            foreach($rows as $row){
+                $orders[] = new Order($row);
+            }
+
+            return $orders;
+        }
+
         public static function create($customerId, $status, $comment) {
             DB::query(
                 "INSERT INTO Orders 
@@ -48,7 +61,7 @@ class Order {
             );
     }
 
-    
+
 }
 
 ?>
