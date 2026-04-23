@@ -44,6 +44,15 @@ $dotenv->load();
             OrderController::index();
         }
 
+        if ($requestUri == "/orders/create") {
+            require "OrderController.php";
+            OrderController::create();
+        }
+
+        if ($requestUri == "/orders/store") {
+            require "OrderController.php";
+            OrderController::store();
+        }
 
 
 
