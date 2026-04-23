@@ -4,25 +4,37 @@
 
 
 require_once __DIR__ . '/../../db/DB.php';
-
+require_once __DIR__ . '/Customer.php';
 
 class Order {
 
-    public static function getALL(){
-       return DB::query("SELECT * FROM Orders");
+    public $order_id;
+    public $status;
+    public $delivery_date;
+    public $order_date;
+    public $comments;
+
+    public function __construct($row) {
+        $this->order_id = $row['order_id'];
+        $this->status = $row['status'];
+        $this->delivery_date = $row['delivery_date'];
+        $this->order_date = $row['order_date'];
+        $this->comments = $row['comments'];
     }
 
+    public static function getAll(){
+        $rows = DB::query("SELECT * FROM Orders");
 
-    public static function getOrdersWithStatus($status) {
-        return DB::query(
-            "SELECT * FROM Orders WHERE status = :status",
-            ['status' => $status]
-        );
-}
+        $orders = [];
 
+        foreach($rows as $row){
+            $orders[] = new Order($row);
+        }
 
-    public static function create($customerId, $status, $comment) {
- 
+        return $orders;
+    }
+
+        public static function create($customerId, $status, $comment) {
             DB::query(
                 "INSERT INTO Orders 
                 (Customers_Id, status, delivery_date, order_date, comments) 
@@ -36,7 +48,7 @@ class Order {
             );
     }
 
-    // orderId, Customers_Id, status, delivery_date, order_date, comments *fields
+    
 }
 
 ?>

@@ -3,8 +3,8 @@
     <label>Customer:</label>
     <select name="customer_id">
         <?php foreach ($customers as $c): ?>
-            <option value="<?= $c['Id'] ?>">
-                <?= $c['firstname'] ?>
+            <option value="<?= $c->Id ?>">
+                <?= $c->firstname ?>
             </option>
         <?php endforeach; ?>
     </select>

@@ -3,55 +3,63 @@
 <?php
 
 require_once __DIR__ . '/../../db/DB.php';
-
+require_once __DIR__ . '/Order.php';
 
 class Customer {
 
-    public static function getALL(){
-       return DB::query("SELECT * FROM customers");
+    public $Id;
+    public $firstname;
+    public $surname;
+    public $birthdate;
+    public $email;
+    public $points;
+    public array $orders = [];
+
+    public function __construct($row) {
+        $this->Id = $row['Id'];
+        $this->firstname = $row['firstname'];
+        $this->surname = $row['surname'];
+        $this->birthdate = $row['birthdate'];
+        $this->email = $row['email'];
+        $this->points = $row['points'];
     }
 
+    public static function getAll(){
+        $rows = DB::query("SELECT * FROM customers");
+
+        $customers = [];
+
+        foreach($rows as $row){
+            $customers[] = new Customer($row);
+        }
+
+        return $customers;
+    }
+
+
     public static function getAllWithOrders(){
-         $data = DB::query
-            ("SELECT * FROM CUSTOMERS C 
-                LEFT JOIN Orders o ON 
-                o.Customers_Id = c.Id
-            ");
 
-            $clients = [];
+    $data = DB::query("
+        SELECT * FROM customers c
+        LEFT JOIN orders o ON o.Customers_Id = c.Id
+    ");
 
-            foreach($data as $row){
-                $clientId = $row['Id'];
+    $clients = [];
 
-                if(!isset($clients[$clientId])){
-                    $clients[$clientId] = [
-                    "Id" => $row["Id"],
-                    "name" => $row["firstname"],
-                    "surname" => $row["surname"],
-                    "birthdate" => $row["birthdate"],
-                    "email" => $row["email"],
-                    "points" => $row["points"],
-                    "orders" => []
-                    ];
+    foreach($data as $row){
+        $id = $row['Id'];
 
-                }
+        if(!isset($clients[$id])){
+            $clients[$id] = new Customer($row);
+        }
 
-                if($row["Customers_Id"]){
-                    $clients[$clientId]["orders"][] = [
-                        "order_id" => $row["order_id"],
-                        "status" => $row["status"],
-                        "delivery_date" => $row["delivery_date"],
-                        "order_date" => $row["order_date"],
-                        "comments" => $row["comments"]
+        if (!empty($row["order_id"])) {
+            $clients[$id]->orders[] = new Order($row);
+        }
+    }
 
-                    ];
-
-                }
-            }
-
-                return $clients;
-                }
-
+    return $clients;
+}
 }
 
 ?>

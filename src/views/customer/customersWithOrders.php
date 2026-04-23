@@ -6,14 +6,14 @@
 
 foreach($clients as $client){
 
-    echo "<h2>" . $client['name'] . "</h2>";
+    echo "<h2>" . $client->firstname . "</h2>";
     echo "Orders:<br>";
 
-    if (empty($client['orders'])) {
+    if (empty($client->orders)) {
         echo "This client doesnt have order<br>";
     } else {
-        foreach($client['orders'] as $order){
-            echo $order['order_id'] . "<br>";
+        foreach($client->orders as $order){
+            echo "Order Id: " . $order->order_id . "<br>";
         }
     }
 
