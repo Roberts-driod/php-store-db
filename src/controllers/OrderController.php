@@ -1,6 +1,7 @@
 <?php
 
 require_once __DIR__ . '/../models/Order.php';
+require_once __DIR__ . '/../models/Customer.php';
 
 class OrderController{
 
@@ -11,14 +12,11 @@ class OrderController{
 
         $withOrders = $_GET['status'] ?? null;
 
-        DB::connect();
 
-
-        if($withOrders == null){
-            self::Orders();
-        }
-        if(isset($withOrders)){
+        if ($withOrders) {
             self::OrdersWithStatus($withOrders);
+        } else {
+            self::Orders();
         }
 
     }
@@ -34,7 +32,7 @@ class OrderController{
         $status = $_POST['status'];
         $comment = $_POST['comments'];
 
-        Order::create($customerId, $status);
+        Order::create($customerId, $status, $comment);
 
         header("Location: /orders");
         exit;

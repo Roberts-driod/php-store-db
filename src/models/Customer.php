@@ -38,7 +38,7 @@ class Customer {
 
                 if($row["Customers_Id"]){
                     $clients[$clientId]["orders"][] = [
-                        "order_id" => $row["orderId"],
+                        "order_id" => $row["order_id"],
                         "status" => $row["status"],
                         "delivery_date" => $row["delivery_date"],
                         "order_date" => $row["order_date"],

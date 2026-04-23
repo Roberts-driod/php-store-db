@@ -26,16 +26,14 @@ class CustomerController{
     public static function Customers(){
     
     $customers = Customer::getALL();
-    require __DIR__ . '/../views/customers.php';
+    require __DIR__ . '/../views/customer/customers.php';
 
     }
 
     public static function CustomersWithOrders(){
 
-
     $clients = Customer::getAllWithOrders();
-    require __DIR__ . '/../views/customersWithOrders.php';
-
+    require __DIR__ . '/../views/customer/customersWithOrders.php';
 
     }
 

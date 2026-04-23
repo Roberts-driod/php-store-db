@@ -45,12 +45,12 @@ $dotenv->load();
         }
 
         if ($requestUri == "/orders/create") {
-            require "OrderController.php";
+            require __DIR__ . "/src/controllers/OrderController.php";
             OrderController::create();
         }
 
         if ($requestUri == "/orders/store") {
-            require "OrderController.php";
+            require __DIR__ . "/src/controllers/OrderController.php";
             OrderController::store();
         }
 

@@ -21,16 +21,19 @@ class Order {
 }
 
 
-    public static function create($customerId, $status) {
+    public static function create($customerId, $status, $comment) {
  
-        DB::query(
-            "INSERT INTO Orders () VALUES (defult,:cid,:status, null, date(now()), :comment )",
-            [
-                'cid' => $customerId,
-                'status' => $status,
-                'comment' => $comment
-            ]
-        );
+            DB::query(
+                "INSERT INTO Orders 
+                (Customers_Id, status, delivery_date, order_date, comments) 
+                VALUES (:cid, :status, :delivery, NOW(), :comment)",
+                [
+                    'cid' => $customerId,
+                    'status' => $status,
+                    'delivery' => null,
+                    'comment' => $comment
+                ]
+            );
     }
 
     // orderId, Customers_Id, status, delivery_date, order_date, comments *fields

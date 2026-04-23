@@ -31,6 +31,10 @@ catch(PDOException $e) {
 
 public static function query($sql, $params = []) {
 
+    if (!self::$pdo) {
+        self::connect();
+    }
+
     $stmt = self::$pdo->prepare($sql);
     $stmt->execute($params);
 

@@ -32,7 +32,7 @@ ENGINE = InnoDB;
 -- Table `store_dev`.`Orders`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `store_dev`.`Orders` (
-  `Id` INT NOT NULL AUTO_INCREMENT,
+  `order_id` INT NOT NULL AUTO_INCREMENT,
   `Customers_Id` INT NOT NULL,
   `status` VARCHAR(255) NULL,
   `delivery_date` DATETIME NULL,
