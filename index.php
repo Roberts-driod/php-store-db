@@ -37,6 +37,15 @@ $dotenv->load();
             OrderController::index();
         }
 
+        if($requestUri == "/"){
+            require __DIR__ . "/src/controllers/CustomerController.php";
+            require __DIR__ . "/src/controllers/OrderController.php";
+            CustomerController::index();
+            OrderController::index();
+        }
+
+
+
 
 
 ?>

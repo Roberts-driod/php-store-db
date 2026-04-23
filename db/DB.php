@@ -29,13 +29,13 @@ catch(PDOException $e) {
 }
 
 
-public static function query($sqlQuery) {
+public static function query($sql, $params = []) {
 
-  $stmt = self::$pdo->query($sqlQuery);  
-  return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    $stmt = self::$pdo->prepare($sql);
+    $stmt->execute($params);
 
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
 
 }
 

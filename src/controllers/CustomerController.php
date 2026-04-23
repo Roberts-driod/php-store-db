@@ -33,7 +33,7 @@ class CustomerController{
     public static function CustomersWithOrders(){
 
 
-    $data = Customer::getAllWithOrders();
+    $clients = Customer::getAllWithOrders();
     require __DIR__ . '/../views/customersWithOrders.php';
 
 
